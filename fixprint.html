@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FixPrint — Broken Part Replacement</title>
+<style>
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f4f6f8;
+    color: #17202a;
+  }
+  header {
+    background: #111827;
+    color: white;
+    padding: 18px 7%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .logo { font-size: 24px; font-weight: 800; }
+  .logo span { color: #ff7a00; }
+  header a {
+    color: white;
+    text-decoration: none;
+    margin-left: 22px;
+  }
+  .hero {
+    padding: 70px 7%;
+    text-align: center;
+    background: white;
+  }
+  .hero h1 {
+    font-size: clamp(38px, 6vw, 68px);
+    margin: 0 auto 18px;
+    max-width: 850px;
+  }
+  .hero h1 span { color: #ff7a00; }
+  .hero p {
+    max-width: 680px;
+    margin: 0 auto 28px;
+    font-size: 20px;
+    color: #59636e;
+  }
+  .button {
+    display: inline-block;
+    background: #ff7a00;
+    color: white;
+    border: 0;
+    border-radius: 10px;
+    padding: 15px 24px;
+    font-size: 17px;
+    font-weight: 700;
+    cursor: pointer;
+    text-decoration: none;
+  }
+  .section {
+    padding: 55px 7%;
+    max-width: 1100px;
+    margin: auto;
+  }
+  .section h2 { font-size: 34px; text-align: center; }
+  .steps {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-top: 30px;
+  }
+  .card {
+    background: white;
+    border-radius: 16px;
+    padding: 25px;
+    box-shadow: 0 5px 20px rgba(0,0,0,.06);
+  }
+  .number {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: #ff7a00;
+    color: white;
+    display: grid;
+    place-items: center;
+    font-weight: 800;
+  }
+  form {
+    background: white;
+    padding: 30px;
+    border-radius: 18px;
+    box-shadow: 0 5px 20px rgba(0,0,0,.07);
+    max-width: 700px;
+    margin: 25px auto 0;
+  }
+  label {
+    display: block;
+    font-weight: 700;
+    margin: 17px 0 7px;
+  }
+  input, textarea, select {
+    width: 100%;
+    padding: 13px;
+    border: 1px solid #cbd5e1;
+    border-radius: 9px;
+    font-size: 16px;
+  }
+  textarea { min-height: 110px; resize: vertical; }
+  .preview {
+    display: none;
+    margin-top: 12px;
+    max-width: 220px;
+    max-height: 180px;
+    border-radius: 10px;
+  }
+  .notice {
+    background: #fff4e8;
+    border-left: 4px solid #ff7a00;
+    padding: 13px;
+    margin-top: 18px;
+    border-radius: 7px;
+  }
+  footer {
+    background: #111827;
+    color: #cbd5e1;
+    text-align: center;
+    padding: 30px;
+    margin-top: 30px;
+  }
+  @media (max-width: 700px) {
+    .steps { grid-template-columns: 1fr; }
+    header { padding: 16px 5%; }
+    header nav { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">Fix<span>Print</span></div>
+  <nav>
+    <a href="#how">How it works</a>
+    <a href="#request">Request a part</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <h1>Broken plastic part?<br><span>We can print a replacement.</span></h1>
+  <p>
+    Send us pictures and measurements of your broken knob, clip, bracket,
+    cover, or other plastic part. We'll check whether we can recreate it.
+  </p>
+  <a class="button" href="#request">Request a replacement</a>
+</section>
+
+<section class="section" id="how">
+  <h2>How it works</h2>
+  <div class="steps">
+    <div class="card">
+      <div class="number">1</div>
+      <h3>Show us the broken part</h3>
+      <p>Upload clear photos and tell us what the part came from.</p>
+    </div>
+    <div class="card">
+      <div class="number">2</div>
+      <h3>We design it</h3>
+      <p>We measure, model, and choose a suitable printing material.</p>
+    </div>
+    <div class="card">
+      <div class="number">3</div>
+      <h3>Get your replacement</h3>
+      <p>After the design is approved, the replacement can be printed.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="request">
+  <h2>Request a replacement</h2>
+
+  <form id="requestForm">
+    <label for="name">Your name</label>
+    <input id="name" required placeholder="Your name">
+
+    <label for="email">Email</label>
+    <input id="email" type="email" required placeholder="you@example.com">
+
+    <label for="part">What is broken?</label>
+    <input id="part" required placeholder="Example: washing machine knob">
+
+    <label for="machine">What does it belong to?</label>
+    <input id="machine" placeholder="Brand + model if known">
+
+    <label for="photo">Photo of the broken part</label>
+    <input id="photo" type="file" accept="image/*" multiple>
+    <img id="preview" class="preview" alt="Photo preview">
+
+    <label for="details">Measurements / details</label>
+    <textarea id="details" placeholder="Diameter, height, hole size, where it broke, etc."></textarea>
+
+    <div class="notice">
+      ⚠️ Don't send parts that could create a safety risk if incorrectly reproduced,
+      such as critical vehicle, medical, gas, electrical, or structural components.
+    </div>
+
+    <br>
+    <button class="button" type="submit">Send request</button>
+    <p id="status"></p>
+  </form>
+</section>
+
+<footer>
+  FixPrint — Turning broken plastic into replacement parts.
+</footer>
+
+<script>
+const photo = document.getElementById("photo");
+const preview = document.getElementById("preview");
+const form = document.getElementById("requestForm");
+const status = document.getElementById("status");
+
+photo.addEventListener("change", () => {
+  const file = photo.files[0];
+  if (!file) {
+    preview.style.display = "none";
+    return;
+  }
+  preview.src = URL.createObjectURL(file);
+  preview.style.display = "block";
+});
+
+form.addEventListener("submit", (event) => {
+  event.preventDefault();
+
+  const name = document.getElementById("name").value;
+  const email = document.getElementById("email").value;
+  const part = document.getElementById("part").value;
+  const machine = document.getElementById("machine").value;
+  const details = document.getElementById("details").value;
+
+  const subject = encodeURIComponent("FixPrint replacement-part request");
+  const body = encodeURIComponent(
+`Name: ${name}
+Email: ${email}
+Broken part: ${part}
+Device/model: ${machine}
+
+Details:
+${details}
+
+I will attach the photos separately.`
+  );
+
+  /*
+    Change this address to your business email.
+    This opens the customer's email app; it does not upload files to a server.
+  */
+  window.location.href =
+    `mailto:YOUR_EMAIL_HERE@example.com?subject=${subject}&body=${body}`;
+
+  status.textContent = "Opening your email app...";
+});
+</script>
+
+</body>
+</html>
